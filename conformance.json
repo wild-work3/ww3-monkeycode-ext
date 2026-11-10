@@ -1,0 +1,58 @@
+{
+  "schema": 1,
+  "id": "monkeycode",
+  "kind": "channel",
+  "model": "monkeycode/basic/glm-5.3-flash",
+  "live_model": "monkeycode/basic/glm-5.3-flash",
+  "auth": {
+    "accessToken": "oma_mock",
+    "expiresAt": 2051222400,
+    "nickname": "monkeycode-mock",
+    "signingSecret": "omas_mock",
+    "uid": "monkeycode-mock"
+  },
+  "account": {
+    "nickname": "monkeycode-mock",
+    "uid": "monkeycode-mock"
+  },
+  "routes": [
+    {
+      "method": "GET",
+      "path": ".*/(models|model/list).*",
+      "kind": "json",
+      "body": "{\"data\":[{\"id\":\"mock-flash\",\"name\":\"Mock Flash\"}],\"models\":[{\"id\":\"mock-flash\"}]}"
+    },
+    {
+      "method": "POST",
+      "path": ".*/messages.*",
+      "kind": "sse_anthropic",
+      "text": "你好，我是 monkeycode mock 上游。",
+      "chunks": 2,
+      "usage": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "completion_tokens": 9,
+        "prompt_tokens": 12
+      }
+    },
+    {
+      "method": "POST",
+      "path": ".*/responses.*",
+      "kind": "sse_openai",
+      "text": "你好，我是 monkeycode mock 上游。",
+      "chunks": 2,
+      "usage": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 0,
+        "completion_tokens": 9,
+        "prompt_tokens": 12
+      }
+    }
+  ],
+  "auth_prefixes": [
+    "monkeycode"
+  ],
+  "notes": [
+    "Anthropic /messages 与 OpenAI /responses 双 API 面；X-Ohmyagent-Signature 签名"
+  ]
+}
